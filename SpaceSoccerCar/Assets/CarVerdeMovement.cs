@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CarMovement : MonoBehaviour
+public class CarVerdeMovement : MonoBehaviour
 {
     WheelJoint2D wheel1;
     WheelJoint2D wheel2;
@@ -27,7 +27,7 @@ public class CarMovement : MonoBehaviour
         // Aceleracion
         float input = Input.GetAxis("Horizontal");
 
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.D))
         {
             if (runSpeed < maxSpeed)
             {
@@ -57,7 +57,7 @@ public class CarMovement : MonoBehaviour
         }
 
         //Frenado
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.A))
         {
             if (runSpeed > -maxSpeed)
             {
