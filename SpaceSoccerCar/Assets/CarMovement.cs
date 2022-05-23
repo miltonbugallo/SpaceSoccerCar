@@ -6,7 +6,8 @@ public class CarMovement : MonoBehaviour
 {
     WheelJoint2D wheel1;
     WheelJoint2D wheel2;
-    public float runSpeed;
+    public float runSpeedAcelerate;
+    public float runSpeedBrake;
     public float walkSpeed;
     public float maxSpeed = 10;
     Rigidbody2D rb;
@@ -15,7 +16,8 @@ public class CarMovement : MonoBehaviour
     {
         wheel1 = gameObject.GetComponents<WheelJoint2D>()[0];
         wheel2 = gameObject.GetComponents<WheelJoint2D>()[1];
-        runSpeed = 5;
+        runSpeedAcelerate = 1;
+        runSpeedBrake = -1;
         walkSpeed = 0;
         rb = GetComponent<Rigidbody2D>();
     }
@@ -25,50 +27,37 @@ public class CarMovement : MonoBehaviour
     {
 
         // Aceleracion
-        float input = Input.GetAxis("Horizontal");
+        //float input = Input.GetAxis("Horizontal");
 
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            if (runSpeed < maxSpeed)
+            if (runSpeedAcelerate < maxSpeed)
             {
-                runSpeed += Time.deltaTime;
+                runSpeedAcelerate += Time.deltaTime;
             }
 
-            rb.velocity = new Vector2(input * runSpeed, rb.velocity.y);
+            rb.velocity = new Vector2(runSpeedAcelerate, rb.velocity.y);
         }
         else if (Input.GetKeyUp(KeyCode.RightArrow))
         {
-            runSpeed = 0;
-            //if (runSpeed > 0)
-            //{
-            //    runSpeed -= Time.deltaTime;
-            //}
-
-            //if (runSpeed < 0) 
-            //{
-            //    runSpeed = 0;
-            //}
-
-            rb.velocity = new Vector2(input * runSpeed, rb.velocity.y);
+            runSpeedAcelerate = 0;
+            rb.velocity = new Vector2(runSpeedAcelerate, rb.velocity.y);
         }
         else
-        {
-            rb.velocity = new Vector2(input * walkSpeed, rb.velocity.y);
-        }
 
         //Frenado
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            if (runSpeed > -maxSpeed)
+            if (runSpeedBrake > -maxSpeed)
             {
-                runSpeed -= Time.deltaTime;
+                runSpeedBrake -= Time.deltaTime;
             }
 
-            rb.velocity = new Vector2(input * runSpeed, rb.velocity.y);
+            rb.velocity = new Vector2(runSpeedBrake, rb.velocity.y);
         }
-        else if (Input.GetKeyUp(KeyCode.RightArrow))
+        else if (Input.GetKeyUp(KeyCode.LeftArrow))
         {
-            runSpeed = 0;
+            runSpeedBrake = 0;
             //if (runSpeed > 0)
             //{
             //    runSpeed -= Time.deltaTime;
@@ -79,11 +68,11 @@ public class CarMovement : MonoBehaviour
             //    runSpeed = 0;
             //}
 
-            rb.velocity = new Vector2(input * runSpeed, rb.velocity.y);
+            rb.velocity = new Vector2(runSpeedBrake, rb.velocity.y);
         }
         else
         {
-            rb.velocity = new Vector2(input * walkSpeed, rb.velocity.y);
+            rb.velocity = new Vector2(walkSpeed, rb.velocity.y);
         }
 
     }

@@ -6,13 +6,13 @@ public class BallMovement : MonoBehaviour
 {
 
     public float ballSpeed = 5;
-    public Rigidbody2D rb;
+    Rigidbody2D rbPelota;
     public Vector2 posicionInicial;
 
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        rbPelota = GetComponent<Rigidbody2D>();
         transform.position = posicionInicial;
         Inicio();
     }
@@ -27,7 +27,7 @@ public class BallMovement : MonoBehaviour
     {
         float x = Random.Range(0, 2) == 0 ? -1 : 1;
         float y = Random.Range(0, 2) == 0 ? -1 : 1;
-        rb.velocity = new Vector2(ballSpeed * x, ballSpeed * y);
+        rbPelota.velocity = new Vector2(ballSpeed * x, ballSpeed * y);
     }
 
 }
