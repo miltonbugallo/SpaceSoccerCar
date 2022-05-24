@@ -23,6 +23,14 @@ public class BallMovement : MonoBehaviour
         
     }
 
+    public void Reset()
+    {
+        transform.position = posicionInicial;
+        rbPelota.velocity = Vector2.zero;
+        Inicio();
+    }
+
+
     public void Inicio()
     {
         float x = Random.Range(0, 2) == 0 ? -1 : 1;

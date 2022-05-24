@@ -14,8 +14,6 @@ public class CarMovement : MonoBehaviour
 
     void Start()
     {
-        wheel1 = gameObject.GetComponents<WheelJoint2D>()[0];
-        wheel2 = gameObject.GetComponents<WheelJoint2D>()[1];
         runSpeedAcelerate = 1;
         runSpeedBrake = -1;
         walkSpeed = 0;
@@ -31,49 +29,25 @@ public class CarMovement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            if (runSpeedAcelerate < maxSpeed)
-            {
-                runSpeedAcelerate += Time.deltaTime;
-            }
-
+            if (runSpeedAcelerate < maxSpeed) runSpeedAcelerate += Time.deltaTime;
             rb.velocity = new Vector2(runSpeedAcelerate, rb.velocity.y);
         }
-        else if (Input.GetKeyUp(KeyCode.RightArrow))
+        if (Input.GetKeyUp(KeyCode.RightArrow))
         {
             runSpeedAcelerate = 0;
             rb.velocity = new Vector2(runSpeedAcelerate, rb.velocity.y);
         }
-        else
-
+      
         //Frenado
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            if (runSpeedBrake > -maxSpeed)
-            {
-                runSpeedBrake -= Time.deltaTime;
-            }
-
+            if (runSpeedBrake > -maxSpeed) runSpeedBrake -= Time.deltaTime;
             rb.velocity = new Vector2(runSpeedBrake, rb.velocity.y);
         }
-        else if (Input.GetKeyUp(KeyCode.LeftArrow))
+        if (Input.GetKeyUp(KeyCode.LeftArrow))
         {
             runSpeedBrake = 0;
-            //if (runSpeed > 0)
-            //{
-            //    runSpeed -= Time.deltaTime;
-            //}
-
-            //if (runSpeed < 0) 
-            //{
-            //    runSpeed = 0;
-            //}
-
             rb.velocity = new Vector2(runSpeedBrake, rb.velocity.y);
         }
-        else
-        {
-            rb.velocity = new Vector2(walkSpeed, rb.velocity.y);
-        }
-
     }
 }
