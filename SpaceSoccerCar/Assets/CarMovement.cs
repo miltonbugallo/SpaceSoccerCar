@@ -14,6 +14,8 @@ public class CarMovement : MonoBehaviour
     public float maxSpeed = 10;
     Rigidbody2D rb;
     public Vector2 posicionInicial;
+    //public float jumpHeight;
+    private bool isJumping = false; // this doesn't need to be public
 
     void Start()
     {
@@ -33,7 +35,7 @@ public class CarMovement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            if (runSpeedAcelerate < maxSpeed) runSpeedAcelerate += Time.deltaTime;
+            if (runSpeedAcelerate < maxSpeed) runSpeedAcelerate += (Time.deltaTime*2);
             rb.velocity = new Vector2(runSpeedAcelerate, rb.velocity.y);
         }
         if (Input.GetKeyUp(KeyCode.RightArrow))
@@ -52,6 +54,28 @@ public class CarMovement : MonoBehaviour
         {
             runSpeedBrake = 0;
             rb.velocity = new Vector2(runSpeedBrake, rb.velocity.y);
+        }
+
+        if (Input.GetKeyDown(KeyCode.UpArrow) && !isJumping)
+        {
+            float jumpVelocity = 5f;
+            rb.velocity = new Vector2(rb.velocity.x, jumpVelocity);
+            isJumping = true;
+        }
+        if (Input.GetKeyUp(KeyCode.UpArrow))
+        {
+            float jumpVelocity = 0;
+            rb.velocity = new Vector2(rb.velocity.x, jumpVelocity);
+        }
+
+    }
+
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.tag == "ground") // GameObject is a type, gameObject is the property
+        {
+            print("hola");
+            isJumping = false;
         }
     }
 
