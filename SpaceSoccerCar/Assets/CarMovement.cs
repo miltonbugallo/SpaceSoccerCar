@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using System.Globalization;
 
 public class CarMovement : MonoBehaviour
 {
@@ -11,6 +13,7 @@ public class CarMovement : MonoBehaviour
     public float walkSpeed;
     public float maxSpeed = 10;
     Rigidbody2D rb;
+    public Vector2 posicionInicial;
 
     void Start()
     {
@@ -18,6 +21,7 @@ public class CarMovement : MonoBehaviour
         runSpeedBrake = -1;
         walkSpeed = 0;
         rb = GetComponent<Rigidbody2D>();
+        transform.position = posicionInicial;
     }
 
     // Update is called once per frame
@@ -50,4 +54,12 @@ public class CarMovement : MonoBehaviour
             rb.velocity = new Vector2(runSpeedBrake, rb.velocity.y);
         }
     }
+
+    public void Reset()
+    {
+        transform.position = posicionInicial;
+        rb.velocity = Vector2.zero;
+    }
+
+
 }

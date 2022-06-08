@@ -17,11 +17,6 @@ public class BallMovement : MonoBehaviour
         Inicio();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void Reset()
     {
