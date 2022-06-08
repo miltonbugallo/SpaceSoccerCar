@@ -13,8 +13,13 @@ public class Goal : MonoBehaviour
         if (collision.CompareTag("pelota"))
         {
             if (playerVerdeGoal) {
-                gameManager.GetComponent<GameManager>().ResetPosition();
+                gameManager.GetComponent<GameManager>().PuntajeJugador2();
+            }
+            else
+            {
+                gameManager.GetComponent<GameManager>().PuntajeJugador1();
             }
         }
+        
     }
 }
