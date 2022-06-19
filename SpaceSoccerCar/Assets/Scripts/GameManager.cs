@@ -21,6 +21,10 @@ public class GameManager : MonoBehaviour
 
     public GameObject freezer;
 
+    public GameObject stopGoal;
+    public GameObject stopGoalIzquierdo;
+    public GameObject stopGoalDerecho;
+
     public void PuntajeJugador1()
     {
         puntajeJugador1++;
@@ -40,7 +44,11 @@ public class GameManager : MonoBehaviour
         pelota.GetComponent<BallMovement>().Reset();
         jugador1.GetComponent<CarMovement>().Reset();
         jugador2.GetComponent<CarVerdeMovement>().Reset();
-        freezer.GetComponent<Freezer>().Reset();
+        //freezer.GetComponent<Freezer>().Reset();
+        //stopGoal.GetComponent<StopGoal>().Reset();
+        stopGoalIzquierdo.GetComponent<StopGoalIzquierdo>().Reset();
+        stopGoalDerecho.GetComponent<StopGoalDerecho>().Reset();
+        
 
     }
 
@@ -55,6 +63,19 @@ public class GameManager : MonoBehaviour
     {
         jugador2.GetComponent<CarVerdeMovement>().StartFreezer();
         freezer.GetComponent<Freezer>().StartFreezerPosition();
+    }
+
+    public void StopGoalPlayer1() 
+    {
+        stopGoalIzquierdo.GetComponent<StopGoalIzquierdo>().StartStopGoalIzquierdo();
+        stopGoal.GetComponent<StopGoal>().StartStopGoalPosition();
+
+    }
+
+    public void StopGoalPlayer2()
+    {
+        stopGoalDerecho.GetComponent<StopGoalDerecho>().StartStopGoalDerecho();
+        stopGoal.GetComponent<StopGoal>().StartStopGoalPosition();
     }
 
 }

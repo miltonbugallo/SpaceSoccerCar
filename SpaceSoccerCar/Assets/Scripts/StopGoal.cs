@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Freezer : MonoBehaviour
+public class StopGoal : MonoBehaviour
 {
     public GameObject gameManager;
     Vector3 pos;
@@ -16,12 +16,12 @@ public class Freezer : MonoBehaviour
     {
         if (collision.CompareTag("player1"))
         {
-            gameManager.GetComponent<GameManager>().FreezerPlayer2(); // Funcion que freeza al player2
+            gameManager.GetComponent<GameManager>().StopGoalPlayer1(); // Funcion que tapa arco al player1
 
         }
         if (collision.CompareTag("player2"))
         {
-            gameManager.GetComponent<GameManager>().FreezerPlayer1(); // Funcion que freeza al player1
+            gameManager.GetComponent<GameManager>().StopGoalPlayer2(); // Funcion que tapa arco al player2
 
         }
 
@@ -29,23 +29,22 @@ public class Freezer : MonoBehaviour
 
     public void Reset()
     {
-        pos = new Vector3(Random.Range(-5f, 5f), -1.10f, 0); // Posicion en x e y en donde puede aparecer
+        pos = new Vector3(Random.Range(-5f, 5f), -1.2f, 0); // Posicion en x e y en donde puede aparecer
         transform.position = pos;
     }
 
 
-    public void StartFreezerPosition()
+    public void StartStopGoalPosition()
     {
-        StartCoroutine(FreezerPosition());
+        StartCoroutine(StopGoalPosition());
     }
 
-    public IEnumerator FreezerPosition()
+    public IEnumerator StopGoalPosition()
     {
         pos = new Vector3(-12f, -2.0f, 0); // Posicion en x e y fuera de vista para que desaparezca temporalmente
         transform.position = pos;
         yield return new WaitForSeconds(5);
         Reset();
-        
-    }
 
+    }
 }
