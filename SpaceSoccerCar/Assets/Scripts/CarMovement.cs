@@ -14,7 +14,6 @@ public class CarMovement : MonoBehaviour
     public float maxSpeed = 10;
     Rigidbody2D rb;
     public Vector2 posicionInicial;
-    //public float jumpHeight;
     private bool isJumping = false; // this doesn't need to be public
 
     void Start()
@@ -35,7 +34,7 @@ public class CarMovement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            if (runSpeedAcelerate < maxSpeed) runSpeedAcelerate += (Time.deltaTime*2);
+            if (runSpeedAcelerate < maxSpeed) runSpeedAcelerate += (Time.deltaTime*4);
             rb.velocity = new Vector2(runSpeedAcelerate, rb.velocity.y);
         }
         if (Input.GetKeyUp(KeyCode.RightArrow))
@@ -47,7 +46,7 @@ public class CarMovement : MonoBehaviour
         //Frenado
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            if (runSpeedBrake > -maxSpeed) runSpeedBrake -= Time.deltaTime;
+            if (runSpeedBrake > -maxSpeed) runSpeedBrake -= (Time.deltaTime * 4);
             rb.velocity = new Vector2(runSpeedBrake, rb.velocity.y);
         }
         if (Input.GetKeyUp(KeyCode.LeftArrow))
@@ -74,7 +73,6 @@ public class CarMovement : MonoBehaviour
     {
         if (col.gameObject.tag == "ground") // GameObject is a type, gameObject is the property
         {
-            print("hola");
             isJumping = false;
         }
     }
@@ -83,7 +81,26 @@ public class CarMovement : MonoBehaviour
     {
         transform.position = posicionInicial;
         rb.velocity = Vector2.zero;
+        rb.constraints = RigidbodyConstraints2D.None;
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
+    public void StartFreezer()
+    {
+        StartCoroutine(Freezer()); // Arranca una funcion que tiene un temporizador
+    }
+
+
+    public IEnumerator Freezer()
+    {
+        rb.velocity = Vector2.zero;
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
+
+        yield return new WaitForSeconds(5); // Luego de 5seg hace lo de abajo
+
+        rb.constraints = RigidbodyConstraints2D.None;
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        isJumping = false;
+    }
 
 }

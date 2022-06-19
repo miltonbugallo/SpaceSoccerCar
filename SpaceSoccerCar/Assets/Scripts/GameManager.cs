@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
     public Text textoPuntaje1;
     public Text textoPuntaje2;
 
+    public GameObject freezer;
+
     public void PuntajeJugador1()
     {
         puntajeJugador1++;
@@ -38,5 +40,21 @@ public class GameManager : MonoBehaviour
         pelota.GetComponent<BallMovement>().Reset();
         jugador1.GetComponent<CarMovement>().Reset();
         jugador2.GetComponent<CarVerdeMovement>().Reset();
+        freezer.GetComponent<Freezer>().Reset();
+
     }
+
+    public void FreezerPlayer1() // Funcion que freeza al player1
+    {
+        jugador1.GetComponent<CarMovement>().StartFreezer();
+        freezer.GetComponent<Freezer>().StartFreezerPosition();
+
+    }
+
+    public void FreezerPlayer2() // Funcion que freeza al player2
+    {
+        jugador2.GetComponent<CarVerdeMovement>().StartFreezer();
+        freezer.GetComponent<Freezer>().StartFreezerPosition();
+    }
+
 }
