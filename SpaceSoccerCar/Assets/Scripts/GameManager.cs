@@ -25,9 +25,40 @@ public class GameManager : MonoBehaviour
     public GameObject stopGoalIzquierdo;
     public GameObject stopGoalDerecho;
 
+    public GameObject finishMatch;
+
+    public float timeValue = 90;
+    public Text timerText;
+
+    void Update()
+    {
+        if (timeValue > 0)
+        {
+            timeValue -= Time.deltaTime;
+            DisplayTime(timeValue);
+        }
+        else
+        {
+            finishMatchTime(puntajeJugador1,puntajeJugador2);
+        }
+
+    }
+
+    void DisplayTime(float timeToDisplay)
+    {
+        float minutes = Mathf.FloorToInt(timeToDisplay / 60);
+        float seconds = Mathf.FloorToInt(timeToDisplay % 60);
+
+        timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+    }
+
     public void PuntajeJugador1()
     {
         puntajeJugador1++;
+        if (puntajeJugador1 == 5)
+        {
+            finishGameScore(1);
+        }
         textoPuntaje1.text = puntajeJugador1.ToString();
         ResetPosition();
     }
@@ -35,6 +66,10 @@ public class GameManager : MonoBehaviour
     public void PuntajeJugador2()
     {
         puntajeJugador2++;
+        if (puntajeJugador2 == 5)
+        {
+            finishGameScore(2);
+        }
         textoPuntaje2.text = puntajeJugador2.ToString();
         ResetPosition();
     }
@@ -76,6 +111,38 @@ public class GameManager : MonoBehaviour
     {
         stopGoalDerecho.GetComponent<StopGoalDerecho>().StartStopGoalDerecho();
         stopGoal.GetComponent<StopGoal>().StartStopGoalPosition();
+    }
+
+    public void finishGameScore(int player)
+    {
+        
+        if (player == 1)
+        {
+            finishMatch.GetComponent<FinishMatch>().LoadScenePlayer1();
+        }
+        if (player == 2)
+        {
+            finishMatch.GetComponent<FinishMatch>().LoadScenePlayer2();
+        }
+    }
+
+    void finishMatchTime(int puntajeJugador1, int puntajeJugador2)
+    {
+        
+        if (puntajeJugador1 > puntajeJugador2)
+        {
+            finishMatch.GetComponent<FinishMatch>().LoadScenePlayer1();
+        }
+        if (puntajeJugador1 < puntajeJugador2)
+        {
+            finishMatch.GetComponent<FinishMatch>().LoadScenePlayer2();
+        }
+        //if (puntajeJugador1 == puntajeJugador2)
+        //{
+        //    finishMatch.GetComponent<FinishMatch>().LoadSceneTie();
+        //}
+        
+
     }
 
 }

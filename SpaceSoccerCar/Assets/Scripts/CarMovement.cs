@@ -14,7 +14,7 @@ public class CarMovement : MonoBehaviour
     public float maxSpeed = 10;
     Rigidbody2D rb;
     public Vector2 posicionInicial;
-    private bool isJumping = false; // this doesn't need to be public
+    private int contadorJump = 0; // this doesn't need to be public
 
     void Start()
     {
@@ -55,11 +55,11 @@ public class CarMovement : MonoBehaviour
             rb.velocity = new Vector2(runSpeedBrake, rb.velocity.y);
         }
 
-        if (Input.GetKeyDown(KeyCode.UpArrow) && !isJumping)
+        if (Input.GetKeyDown(KeyCode.UpArrow) && contadorJump < 2)
         {
-            float jumpVelocity = 5f;
+            float jumpVelocity = 7f;
             rb.velocity = new Vector2(rb.velocity.x, jumpVelocity);
-            isJumping = true;
+            contadorJump++;
         }
         if (Input.GetKeyUp(KeyCode.UpArrow))
         {
@@ -73,7 +73,7 @@ public class CarMovement : MonoBehaviour
     {
         if (col.gameObject.tag == "ground") // GameObject is a type, gameObject is the property
         {
-            isJumping = false;
+            contadorJump = 0;
         }
     }
 
@@ -100,7 +100,7 @@ public class CarMovement : MonoBehaviour
 
         rb.constraints = RigidbodyConstraints2D.None;
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-        isJumping = false;
+        contadorJump = 0;
     }
 
 }

@@ -29,7 +29,7 @@ public class Freezer : MonoBehaviour
 
     public void Reset()
     {
-        pos = new Vector3(Random.Range(-5f, 5f), -1.10f, 0); // Posicion en x e y en donde puede aparecer
+        pos = new Vector3(Random.Range(-5f, 5f), 1.0f, 0); // Posicion en x e y en donde puede aparecer
         transform.position = pos;
     }
 
