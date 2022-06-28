@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: dba82dfea07fe8c4faa1799bd2c19b85
   - enabled: 1
+    path: Assets/Scenes/Controles.unity
+    guid: caac0ffefd97c6e46a160edcf82913e1
+  - enabled: 1
     path: Assets/Scenes/GameScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
@@ -17,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Player2Win.unity
     guid: 685f25c63962f0f4eab0cd47251edab4
+  - enabled: 1
+    path: Assets/Scenes/TieMatch.unity
+    guid: e5e58466fe21f9d4ab213e86f5b856fd
   m_configObjects: {}

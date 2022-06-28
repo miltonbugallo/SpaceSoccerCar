@@ -137,11 +137,11 @@ public class GameManager : MonoBehaviour
         {
             finishMatch.GetComponent<FinishMatch>().LoadScenePlayer2();
         }
-        //if (puntajeJugador1 == puntajeJugador2)
-        //{
-        //    finishMatch.GetComponent<FinishMatch>().LoadSceneTie();
-        //}
-        
+        if (puntajeJugador1 == puntajeJugador2)
+        {
+            finishMatch.GetComponent<FinishMatch>().LoadSceneTie();
+        }
+
 
     }
 
