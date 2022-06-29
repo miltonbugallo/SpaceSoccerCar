@@ -18,7 +18,7 @@ public class FinishMatch : MonoBehaviour
 
     public void LoadSceneTie()
     {
-        SceneManager.LoadScene("Tie");
+        SceneManager.LoadScene("TieMatch");
     }
 
 }

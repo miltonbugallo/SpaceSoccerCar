@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (timeValue > 0)
+        if (timeValue >= 1)
         {
             timeValue -= Time.deltaTime;
             DisplayTime(timeValue);

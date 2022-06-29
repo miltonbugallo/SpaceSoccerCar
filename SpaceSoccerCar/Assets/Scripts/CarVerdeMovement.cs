@@ -30,12 +30,12 @@ public class CarVerdeMovement : MonoBehaviour
         // Aceleracion
         //float inputVerde = Input.GetAxis("Vertical");
 
-        if (Input.GetKey(KeyCode.G))
+        if (Input.GetKey(KeyCode.LeftArrow))
         {
             if (runSpeedAcelerateVerde < maxSpeedVerde) runSpeedAcelerateVerde += (Time.deltaTime * 4);
             rbVerde.velocity = new Vector2(-runSpeedAcelerateVerde, rbVerde.velocity.y);
         }
-        if (Input.GetKeyUp(KeyCode.G))
+        if (Input.GetKeyUp(KeyCode.LeftArrow))
         {
             runSpeedAcelerateVerde = 0;
             rbVerde.velocity = new Vector2(runSpeedAcelerateVerde, rbVerde.velocity.y);
@@ -43,24 +43,24 @@ public class CarVerdeMovement : MonoBehaviour
 
 
         //Frenado
-        if (Input.GetKey(KeyCode.J))
+        if (Input.GetKey(KeyCode.RightArrow))
         {
             if (runSpeedBrakeVerde > -maxSpeedVerde) runSpeedBrakeVerde -= (Time.deltaTime * 4);
             rbVerde.velocity = new Vector2(-runSpeedBrakeVerde, rbVerde.velocity.y);
         }
-        if (Input.GetKeyUp(KeyCode.J))
+        if (Input.GetKeyUp(KeyCode.RightArrow))
         {
             runSpeedBrakeVerde = 0;
             rbVerde.velocity = new Vector2(runSpeedBrakeVerde, rbVerde.velocity.y);
         }
 
-        if (Input.GetKeyDown(KeyCode.Y) && contadorJump < 2)
+        if (Input.GetKeyDown(KeyCode.UpArrow) && contadorJump < 2)
         {
             float jumpVelocity = 7f;
             rbVerde.velocity = new Vector2(rbVerde.velocity.x, jumpVelocity);
             contadorJump++;
         }
-        if (Input.GetKeyUp(KeyCode.Y))
+        if (Input.GetKeyUp(KeyCode.UpArrow))
         {
             float jumpVelocity = 0;
             rbVerde.velocity = new Vector2(rbVerde.velocity.x, jumpVelocity);
